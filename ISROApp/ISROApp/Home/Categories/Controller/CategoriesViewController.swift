@@ -18,6 +18,7 @@ class CategoriesViewController: UIViewController {
     // MARK: Variables
     
     private var categories: [Category]!
+    private var genericTableViewDataSource: GenericTableViewDataSource<UITableViewCell, Category>!
     
     // MARK: - IBOutlets
     
@@ -27,37 +28,32 @@ class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        title = type(of: self).screenTitle
         getCategories()
     }
     
     // MARK: Private Methods
     
-    private func setupUI() {
-        title = type(of: self).screenTitle
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
     private func getCategories() {
         categories = CategoryService().getCategories()
-        tableView.reloadData()
+        setupDataSource()
+    }
+    
+    private func setupDataSource() {
+        genericTableViewDataSource = GenericTableViewDataSource(cellIdentifier: type(of: self).homeCellIdentifier,
+                                                                items: categories,
+                                                                configureCell: { (cell, item) in
+            cell.textLabel?.text = item.name
+        })
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self.genericTableViewDataSource
+        self.tableView.reloadData()
     }
 }
 
-// Extenstion added to implement 'TableViewDelegate & TableViewDataSource' methods.
-extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        categories.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: self).homeCellIdentifier, for: indexPath)
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = categories[indexPath.row].name
-        return cell
-    }
-    
+// Extenstion added to implement 'TableViewDataSource' methods.
+extension CategoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {

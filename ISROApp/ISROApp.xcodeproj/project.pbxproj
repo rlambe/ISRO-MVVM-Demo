@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2520E05D2779DD92004AB265 /* GenericTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2520E05C2779DD92004AB265 /* GenericTableViewDataSource.swift */; };
 		2592FD3F2778C65400A7F17D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592FD3E2778C65400A7F17D /* AppDelegate.swift */; };
 		2592FD412778C65400A7F17D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592FD402778C65400A7F17D /* SceneDelegate.swift */; };
 		2592FD432778C65400A7F17D /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592FD422778C65400A7F17D /* CategoriesViewController.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2520E05C2779DD92004AB265 /* GenericTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewDataSource.swift; sourceTree = "<group>"; };
 		2592FD3B2778C65400A7F17D /* ISROApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ISROApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2592FD3E2778C65400A7F17D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2592FD402778C65400A7F17D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2520E05B2779DD62004AB265 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2520E05C2779DD92004AB265 /* GenericTableViewDataSource.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		2592FD322778C65400A7F17D = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 		2592FD6E2778C67C00A7F17D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2520E05B2779DD62004AB265 /* Utility */,
 				2592FD762778CCC600A7F17D /* Categories */,
 				2592FD772778CCE700A7F17D /* Spacecrafts */,
 			);
@@ -372,6 +383,7 @@
 				2592FD432778C65400A7F17D /* CategoriesViewController.swift in Sources */,
 				2592FD872778D41700A7F17D /* SpacecraftsViewController.swift in Sources */,
 				2592FD7D2778CD4400A7F17D /* Spacecraft.swift in Sources */,
+				2520E05D2779DD92004AB265 /* GenericTableViewDataSource.swift in Sources */,
 				2592FD852778D31E00A7F17D /* SpacecraftTableViewCell.swift in Sources */,
 				2592FD832778D10F00A7F17D /* SpacecraftItemViewModel.swift in Sources */,
 				2592FD3F2778C65400A7F17D /* AppDelegate.swift in Sources */,

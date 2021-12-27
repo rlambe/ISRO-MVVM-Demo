@@ -20,6 +20,7 @@ class SpacecraftsViewController: UIViewController {
     // MARK: - Variables
     
     private var spacecraftViewModel: SpacecraftsViewModel
+    private var genericTableViewDataSource: GenericTableViewDataSource<SpacecraftTableViewCell, SpacecraftItemViewModel>!
     
     // MARK: - Initializer
     
@@ -46,36 +47,27 @@ class SpacecraftsViewController: UIViewController {
     private func setupUI() {
         title = type(of: self).screenTitle
 
-        tableview.dataSource = self
         tableview.estimatedRowHeight = 44
         tableview.rowHeight = UITableView.automaticDimension
     }
-
-}
-
-// Extension is added to implement 'UITableViewDataSource' methods.
-extension SpacecraftsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        spacecraftViewModel.itemViewModels.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SpacecraftTableViewCell.self)",
-                                                       for: indexPath) as? SpacecraftTableViewCell
-        else {
-            return UITableViewCell()
-        }
-        let itemViewModel = spacecraftViewModel.itemViewModels[indexPath.row]
-        cell.bind(viewModel: itemViewModel)
-        return cell
+    private func setupTabelViewDataSource() {
+        genericTableViewDataSource = GenericTableViewDataSource(cellIdentifier: "\(SpacecraftTableViewCell.self)",
+                                                                items: spacecraftViewModel.itemViewModels,
+                                                                configureCell: { (cell, item)  in
+            cell.bind(viewModel: item)
+        })
+        
+        self.tableview.dataSource = self.genericTableViewDataSource
+        self.tableview.reloadData()
     }
-    
+
 }
 
 // Extension added to implement 'SpacecraftsViewModelDelegate' methods.
 extension SpacecraftsViewController: SpacecraftsViewModelDelegate {
     func onSucees() {
-        tableview.reloadData()
+        setupTabelViewDataSource()
     }
     
     func onFailure(error: Error) {
